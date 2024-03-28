@@ -1,0 +1,240 @@
+/* ©2024 Maison Flynn | All Rights Reserved */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #f8f8f8;
+}
+.container {
+  padding: 25px;
+  border-radius: 10px;
+  background: #fafafa;
+  box-shadow: 25px 25px 75px rgba(0, 0, 0, 0.15),
+    10px 10px 70px rgba(0, 0, 0, 0.15), inset -5px -5px 15px rgba(0, 0, 0, 0.15),
+    inset 5px 5px 15px rgba(0, 0, 0, 0.05);
+}
+.cards,
+.card,
+.view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cards {
+  height: 400px;
+  width: 400px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.cards .card {
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  position: relative;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  height: calc(100% / 4 - 10px);
+  width: calc(100% / 4 - 10px);
+}
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  90% {
+    transform: translateX(-4px);
+  }
+  20%,
+  80% {
+    transform: translateX(4px);
+  }
+  30%,
+  70% {
+    transform: translateX(-4px);
+  }
+  40%,
+  60% {
+    transform: translateX(4px);
+  }
+  50% {
+    transform: translateX(-4px);
+  }
+}
+.card.shake {
+  animation: shake 0.75s ease-in-out;
+}
+.card .view {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 7px;
+  background: #fff;
+  pointer-events: none;
+  backface-visibility: hidden;
+  box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.1), 2px 2px 5px rgba(0, 0, 0, 0.1),
+    inset -3px -3px 5px rgba(0, 0, 0, 0.1),
+    inset 2px 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.25s linear;
+}
+.card .front img {
+  width: 30px;
+}
+.card .back img {
+  max-width: 45px;
+}
+.card .back {
+  transform: rotateY(-180deg);
+}
+.card.flip .back {
+  transform: rotateY(0);
+}
+.card.flip .front {
+  transform: rotateY(180deg);
+}
+.information {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+  width: 400px;
+  gap: 25px;
+}
+.leaderboard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+  width: 400px;
+  gap: 25px;
+}
+.timer,
+.moves,
+.bestTime,
+.wins {
+  display: flex;
+  background: #fff;
+  padding: 15px 30px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.1), 2px 2px 5px rgba(0, 0, 0, 0.1),
+    inset -3px -3px 5px rgba(0, 0, 0, 0.1),
+    inset 2px 2px 5px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+.card.matched .view.back {
+  background-color: #90ee90;
+  transition: background-color 0.75s ease-in-out;
+}
+
+/* Responsiveness */
+@media screen and (max-width: 700px) {
+  .cards {
+    height: 350px;
+    width: 350px;
+  }
+  .information,
+  .leaderboard {
+    width: 350px;
+  }
+  .moves {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .card .back img {
+    max-width: 40px;
+  }
+}
+@media screen and (max-width: 530px) {
+  .cards {
+    height: 300px;
+    width: 300px;
+  }
+  .information,
+  .leaderboard {
+    width: 300px;
+  }
+  .card .back img {
+    max-width: 35px;
+  }
+}
+
+/* Dark */
+.button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  font-size: 1.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 5px 5px 7px rgba(0, 0, 0, 0.1), 2px 2px 5px rgba(0, 0, 0, 0.1),
+    inset -3px -3px 5px rgba(0, 0, 0, 0.1),
+    inset 2px 2px 5px rgba(0, 0, 0, 0.05);
+}
+body.dark .button {
+  background: #424242;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3),
+    inset -3px -3px 6px rgba(0, 0, 0, 0.4),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.05);
+}
+.button strong {
+  display: none;
+}
+.button strong:nth-child(1) {
+  display: block;
+}
+body.dark .button strong:nth-child(1) {
+  display: none;
+}
+body.dark .button strong:nth-child(2) {
+  display: block;
+}
+body.dark {
+  background: #292929;
+  color: #fff;
+}
+body.dark .container {
+  background: #333;
+  box-shadow: 25px 25px 75px rgba(0, 0, 0, 0.25),
+    10px 10px 70px rgba(0, 0, 0, 0.25), inset -5px -5px 15px rgba(0, 0, 0, 0.5),
+    inset 5px 5px 15px rgba(0, 0, 0, 0.5),
+    inset 10px 10px 25px rgba(255, 255, 255, 0.1);
+}
+body.dark .card .view {
+  background: #424242;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3),
+    inset -3px -3px 6px rgba(0, 0, 0, 0.4),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.05);
+}
+body.dark .timer,
+body.dark .moves,
+body.dark .bestTime,
+body.dark .wins {
+  background: #424242;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3),
+    inset -3px -3px 6px rgba(0, 0, 0, 0.4),
+    inset 3px 3px 6px rgba(255, 255, 255, 0.05);
+}
+body.dark .card.matched .view.back {
+  background-color: #76b07b;
+}
+
+/* Effects */
+.button:active {
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
